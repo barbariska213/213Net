@@ -42,4 +42,4 @@ and contains code and ideas from other DDNet clients:
 
 All credit for the borrowed features goes to their authors.
 Files taken from other projects keep their original license headers.
-213Net is distributed under the zlib license, see license.txt
+213Net is distributed under the zlib license, see license.txt.
