@@ -1,7 +1,6 @@
 <p align="center">
   <img src="data/gui_logo.png" alt="213Net" width="400">
 </p>
-# 213Net
 
 A custom client for [DDNet](https://ddnet.org), the Teeworlds-based
 cooperative platformer, focused on visual customization and convenience.
