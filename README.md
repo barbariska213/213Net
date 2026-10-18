@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="gui_logo.png" alt="213Net" width="400">
+  <img src="data/gui_logo.png" alt="213Net" width="400">
 </p>
 # 213Net
 
