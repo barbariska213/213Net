@@ -10,7 +10,6 @@ cooperative platformer, focused on visual customization and convenience.
 
 ## Planned features
 
-- **Discord Rich Presence:** shows that you are playing 213Net
 - **Warlist system:** built-in warlist managed with chat commands
 - **Utility lists:** war list and team list
 - **Censor list:** censor and replace unwanted words everywhere: chat, nameplates, scoreboard and more
