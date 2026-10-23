@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#0d0b08">
+<title>213Net – a custom DDNet client</title>
+<meta name="description" content="213Net is an unofficial DDNet client with handy lists, visual extras and quality-of-life improvements. Work in progress.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230d0b08'/%3E%3Ctext x='32' y='42' font-size='28' font-weight='900' text-anchor='middle' fill='%23ff9f1c' font-family='Arial'%3E213%3C/text%3E%3C/svg%3E">
+<style>
+:root{--bg:#0d0b08;--panel:#17130d;--line:#3a2b12;--text:#f6ecd9;--muted:#c4b393;--accent:#ff9f1c;--amber:#e07b00;--ink:#1a1308;box-sizing:border-box}
+*,*::before,*::after{box-sizing:inherit}
+body{margin:0;color:var(--text);font-family:"Segoe UI Variable","Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;line-height:1.6;background-color:var(--bg);
+background-image:radial-gradient(ellipse 60% 520px at 50% 240px,rgba(255,159,28,.22),transparent 70%),url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='392' height='288' viewBox='0 0 392 288'%3E%3Cdefs%3E%3Cpattern id='p' width='28' height='48' patternUnits='userSpaceOnUse'%3E%3Cpath d='M14 0L28 8V24L14 32L0 24V8Z M14 32V48' fill='none' stroke='%23ff9f1c' stroke-opacity='.11' stroke-width='1.5'/%3E%3C/pattern%3E%3C/defs%3E%3Crect width='392' height='288' fill='url(%23p)'/%3E%3Cpolygon points='98,0 112,8 112,24 98,32 84,24 84,8' fill='%23ff9f1c' fill-opacity='0.5' stroke='%23ffd27a' stroke-opacity='.35' stroke-width='1'/%3E%3Cpolygon points='252,24 266,32 266,48 252,56 238,48 238,32' fill='%23ff9f1c' fill-opacity='0.3' stroke='%23ffd27a' stroke-opacity='.35' stroke-width='1'/%3E%3Cpolygon points='182,48 196,56 196,72 182,80 168,72 168,56' fill='%23ff9f1c' fill-opacity='0.4' stroke='%23ffd27a' stroke-opacity='.35' stroke-width='1'/%3E%3Cpolygon points='350,48 364,56 364,72 350,80 336,72 336,56' fill='%23ff9f1c' fill-opacity='0.22' stroke='%23ffd27a' stroke-opacity='.35' stroke-width='1'/%3E%3Cpolygon points='56,72 70,80 70,96 56,104 42,96 42,80' fill='%23ff9f1c' fill-opacity='0.5' stroke='%23ffd27a' stroke-opacity='.35' stroke-width='1'/%3E%3Cpolygon points='266,96 280,104 280,120 266,128 252,120 252,104' fill='%23ff9f1c' fill-opacity='0.3' stroke='%23ffd27a' stroke-opacity='.35' stroke-width='1'/%3E%3Cpolygon points='14,96 28,104 28,120 14,128 0,120 0,104' fill='%23ff9f1c' fill-opacity='0.4' stroke='%23ffd27a' stroke-opacity='.35' stroke-width='1'/%3E%3Cpolygon points='140,120 154,128 154,144 140,152 126,144 126,128' fill='%23ff9f1c' fill-opacity='0.22' stroke='%23ffd27a' stroke-opacity='.35' stroke-width='1'/%3E%3Cpolygon points='336,120 350,128 350,144 336,152 322,144 322,128' fill='%23ff9f1c' fill-opacity='0.5' stroke='%23ffd27a' stroke-opacity='.35' stroke-width='1'/%3E%3Cpolygon points='98,144 112,152 112,168 98,176 84,168 84,152' fill='%23ff9f1c' fill-opacity='0.3' stroke='%23ffd27a' stroke-opacity='.35' stroke-width='1'/%3E%3Cpolygon points='294,144 308,152 308,168 294,176 280,168 280,152' fill='%23ff9f1c' fill-opacity='0.4' stroke='%23ffd27a' stroke-opacity='.35' stroke-width='1'/%3E%3Cpolygon points='196,168 210,176 210,192 196,200 182,192 182,176' fill='%23ff9f1c' fill-opacity='0.22' stroke='%23ffd27a' stroke-opacity='.35' stroke-width='1'/%3E%3Cpolygon points='42,192 56,200 56,216 42,224 28,216 28,200' fill='%23ff9f1c' fill-opacity='0.5' stroke='%23ffd27a' stroke-opacity='.35' stroke-width='1'/%3E%3Cpolygon points='378,192 392,200 392,216 378,224 364,216 364,200' fill='%23ff9f1c' fill-opacity='0.3' stroke='%23ffd27a' stroke-opacity='.35' stroke-width='1'/%3E%3Cpolygon points='112,216 126,224 126,240 112,248 98,240 98,224' fill='%23ff9f1c' fill-opacity='0.4' stroke='%23ffd27a' stroke-opacity='.35' stroke-width='1'/%3E%3Cpolygon points='308,216 322,224 322,240 308,248 294,240 294,224' fill='%23ff9f1c' fill-opacity='0.22' stroke='%23ffd27a' stroke-opacity='.35' stroke-width='1'/%3E%3Cpolygon points='210,240 224,248 224,264 210,272 196,264 196,248' fill='%23ff9f1c' fill-opacity='0.5' stroke='%23ffd27a' stroke-opacity='.35' stroke-width='1'/%3E%3C/svg%3E");background-size:auto,784px 576px}
+a{color:inherit}a:focus-visible{outline:3px solid var(--accent);outline-offset:3px;border-radius:4px}
+.wrap{max-width:1040px;margin:0 auto;padding:0 24px}
+.ic{fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+nav{display:flex;align-items:center;justify-content:space-between;padding:14px 0}
+nav img{height:52px;width:auto;margin-left:-32px;display:block}
+nav a.gh{font-weight:700;text-decoration:none;border:2px solid var(--line);border-radius:10px;padding:7px 16px}
+nav a.gh:hover{border-color:var(--accent)}
+
+.hero{text-align:center;padding:48px 0 56px}
+h1{font-size:clamp(2.2rem,6vw,3.5rem);line-height:1.08;margin:0 0 18px;font-weight:800}
+h1 em{font-style:normal;color:var(--accent)}
+.lead{font-size:1.15rem;color:var(--muted);max-width:32rem;margin:0 auto 26px}
+.actions{display:flex;flex-wrap:wrap;gap:12px;justify-content:center}
+.btn{display:inline-block;padding:12px 24px;border-radius:10px;font-weight:700;text-decoration:none;border:2px solid var(--accent)}
+.btn.primary{background:linear-gradient(180deg,#ffb52e,var(--accent) 60%,#e88a00);color:var(--ink);box-shadow:0 6px 20px rgba(255,159,28,.3)}
+.btn.ghost{color:var(--text);background:rgba(13,11,8,.6)}.btn.ghost:hover{background:var(--accent);color:var(--ink)}
+.btn.primary:hover{filter:brightness(1.1)}
+.by{margin:46px 0 0;color:var(--muted);font-size:.95rem}.by a{color:var(--accent);font-weight:700;text-decoration:none}.by a:hover{text-decoration:underline}
+
+.status{position:relative;overflow:hidden;background:var(--panel);border:2px solid var(--accent);border-radius:10px;padding:24px 18px 14px;margin:0 0 56px;color:var(--muted)}
+.status::before{content:"";position:absolute;left:0;right:0;top:0;height:8px;background:repeating-linear-gradient(-45deg,var(--accent) 0 12px,var(--bg) 12px 24px)}
+.status strong{color:var(--text)}
+
+h2{font-size:1.8rem;margin:0 0 8px}
+.sub{color:var(--muted);margin:0 0 28px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:18px}
+.card{background:var(--panel);border:1px solid var(--line);border-top:3px solid var(--accent);border-radius:12px;padding:20px 20px 18px;transition:border-color .2s,transform .2s}
+.card:hover{border-color:var(--accent);transform:translateY(-3px)}
+.badge{width:54px;height:60px;display:grid;place-items:center;margin-bottom:14px;color:var(--ink);background:linear-gradient(160deg,#ffc857,var(--accent) 55%,var(--amber));clip-path:polygon(50% 0,100% 25%,100% 75%,50% 100%,0 75%,0 25%)}
+.badge svg{width:26px;height:26px}
+.card h3{margin:0 0 4px;font-size:1.1rem}.card p{margin:0;color:var(--muted);font-size:.95rem}
+@media (prefers-reduced-motion:reduce){.card{transition:none}.card:hover{transform:none}}
+
+footer{margin-top:64px;padding:28px 0 40px;border-top:3px solid var(--accent);color:var(--muted);font-size:.95rem}
+footer p{margin:0 0 10px;max-width:46rem}
+@media (prefers-reduced-motion:no-preference){
+html{scroll-behavior:smooth}
+@keyframes rise{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+@keyframes tape{to{background-position-x:33.94px}}
+nav{animation:rise .6s backwards}
+.hero h1,.hero .lead,.hero .actions,.hero .by{animation:rise .8s cubic-bezier(.2,.7,.2,1) backwards}
+.hero .lead{animation-delay:.12s}.hero .actions{animation-delay:.24s}.hero .by{animation-delay:.36s}
+.status::before{background-size:33.94px 33.94px;animation:tape 2.4s linear infinite}
+.js .card{opacity:0}
+.js .card.in{opacity:1;animation:rise .7s cubic-bezier(.2,.7,.2,1) var(--dl,0s) backwards}
+}
+</style>
+<script>document.documentElement.classList.add("js")</script>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+<defs>
+<symbol id="spark" viewBox="0 0 24 24"><path d="M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8zM19 16l.8 2.2L22 19l-2.2.8L19 22l-.8-2.2L16 19l2.2-.8z"/></symbol>
+<symbol id="aa" viewBox="0 0 24 24"><text x="12" y="17" text-anchor="middle" font-size="15" font-weight="900" font-family="Arial,sans-serif" fill="currentColor" stroke="none">Aa</text></symbol>
+<symbol id="radar" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="8"/><path d="M12 1v4M12 19v4M1 12h4M19 12h4"/></symbol>
+<symbol id="snow" viewBox="0 0 24 24"><path d="M12 2v20M4 7l16 10M20 7L4 17M9 3.5l3 2 3-2M9 20.5l3-2 3 2"/></symbol>
+<symbol id="search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5L21 21"/></symbol>
+<symbol id="shield" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2.2 2.2L15.5 10"/></symbol>
+<symbol id="bubble" viewBox="0 0 24 24"><path d="M4 5h16v11H9l-5 4z"/><path d="M8 10.5h8" stroke-width="3.5"/></symbol>
+<symbol id="user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></symbol>
+<symbol id="bolt" viewBox="0 0 24 24"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></symbol>
+<symbol id="sliders" viewBox="0 0 24 24"><path d="M4 7h8M18 7h2M4 17h2M12 17h8"/><circle cx="15" cy="7" r="2.2"/><circle cx="9" cy="17" r="2.2"/></symbol>
+</defs>
+</svg>
+
+<div class="wrap">
+  <nav>
+    <img src="gui_logo.png" alt="213Net">
+    <a class="gh" href="https://github.com/barbariska213/213Net">GitHub</a>
+  </nav>
+
+  <header class="hero">
+    <div>
+      <h1>A <em>sweeter</em> way to play DDNet</h1>
+      <p class="lead">213Net is a DDNet client with handy lists, visual extras and a few quality-of-life improvements. It adds no cheats and no unfair advantages.</p>
+      <div class="actions">
+        <a class="btn primary" href="https://github.com/barbariska213/213Net/releases">Download</a>
+        <a class="btn ghost" href="#features">See features</a>
+      </div>
+      <p class="by">Fork created by <a href="https://github.com/barbariska213">barbariska213</a></p>
+    </div>
+  </header>
+
+  <main>
+    <p class="status"><strong>Work in progress.</strong> The features below are planned and not released yet. Check the Releases page for the first build.</p>
+
+    <h2 id="features">Planned features</h2>
+    <p class="sub">What is coming to 213Net.</p>
+    <div class="grid">
+      <article class="card"><div class="badge"><svg class="ic" viewBox="0 0 24 24"><use href="#spark"/></svg></div><h3>Visual enhancements</h3><p>Rainbow skins, weapon and hook colors, tee trails and smooth animations.</p></article>
+      <article class="card"><div class="badge"><svg class="ic" viewBox="0 0 24 24"><use href="#aa"/></svg></div><h3>Fonts</h3><p>A wide selection of fonts, plus support for your own.</p></article>
+      <article class="card"><div class="badge"><svg class="ic" viewBox="0 0 24 24"><use href="#radar"/></svg></div><h3>Player indicator</h3><p>Track players around you without zooming out. Not available on PvP servers.</p></article>
+      <article class="card"><div class="badge"><svg class="ic" viewBox="0 0 24 24"><use href="#snow"/></svg></div><h3>Frozen tee display</h3><p>See all frozen players on your team.</p></article>
+      <article class="card"><div class="badge"><svg class="ic" viewBox="0 0 24 24"><use href="#search"/></svg></div><h3>Info search</h3><p>Look up player and map data from DDStats.</p></article>
+      <article class="card"><div class="badge"><svg class="ic" viewBox="0 0 24 24"><use href="#shield"/></svg></div><h3>Warlist</h3><p>War and team lists, managed with chat commands.</p></article>
+      <article class="card"><div class="badge"><svg class="ic" viewBox="0 0 24 24"><use href="#bubble"/></svg></div><h3>Censor list</h3><p>Hide or replace unwanted words in chat, nameplates, the scoreboard and more.</p></article>
+      <article class="card"><div class="badge"><svg class="ic" viewBox="0 0 24 24"><use href="#user"/></svg></div><h3>Profiles</h3><p>Save and load skin, colors, emote, name, clan and flag.</p></article>
+      <article class="card"><div class="badge"><svg class="ic" viewBox="0 0 24 24"><use href="#bolt"/></svg></div><h3>Input and ping tools</h3><p>Reduced input lag and anti-lag ping tools.</p></article>
+      <article class="card"><div class="badge"><svg class="ic" viewBox="0 0 24 24"><use href="#sliders"/></svg></div><h3>Quality-of-life tweaks</h3><p>Small improvements to the HUD and chat.</p></article>
+    </div>
+  </main>
+
+  <footer>
+    <p>213Net is not affiliated with or endorsed by DDNet. All credit for the original game goes to the DDNet and Teeworlds developers.</p>
+    <p>Based on <a href="https://github.com/ddnet/ddnet">DDNet</a>, with features adapted from <a href="https://github.com/TaterClient/TClient">TClient</a> and <a href="https://cactuss.top">Cactus Client</a>.</p>
+    <p>Distributed under the zlib license, see <a href="https://github.com/barbariska213/213Net/blob/master/license.txt">license.txt</a>.</p>
+  </footer>
+</div>
+<script>
+(function(){
+var cards=[].slice.call(document.querySelectorAll('.card'));
+cards.forEach(function(c,i){c.style.setProperty('--dl',(i%3)*0.1+'s')});
+if(!('IntersectionObserver' in window)){cards.forEach(function(c){c.classList.add('in')});return}
+var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:0.15});
+cards.forEach(function(c){io.observe(c)});
+})();
+</script>
+</body>
+</html>
